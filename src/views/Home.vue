@@ -2,12 +2,9 @@
   <div class="home">
     <b-container fluid>
       <b-row>
-        <b-col md="2">
-          <b-card bg-variant="info">
-            <b-card-title>
-              <b-button>asd</b-button>
-            </b-card-title>
-          </b-card>
+        <b-col md="3" >
+          <!-- style="background:red;" -->
+          <TotalCasos />
         </b-col>
         </b-row>      
     </b-container>
@@ -16,25 +13,22 @@
 
 <script>
 // @ is an alias to /src
-import {mapActions, mapGetters} from 'vuex'
-
+import {mapActions} from 'vuex'
+import TotalCasos from '@/components/TotalCasos'
 
 export default {
   name: 'Home',
   components: {
-    
+    TotalCasos
   },
   mounted(){
     //usage:
     this.loadData()
-    console.log({naciona: this.getNacional})
   },
   methods: {
     ...mapActions(['loadData'])    
   },
-  computed: {
-    ...mapGetters(['getNacional'])
-  }
+  
 }
 
 
