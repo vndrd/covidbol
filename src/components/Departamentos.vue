@@ -9,7 +9,7 @@
                     header-text-variant="white"
                     align="center"
                     >
-                    <Daily v-if="mostrarDepartamentos" :datos="sumarDepartamentos" />
+                    <LineNacional v-if="mostrarDepartamentos" :datos="sumarDepartamentos" />
                 </b-card>
             </b-col>
             <b-col md="6">
@@ -20,7 +20,7 @@
                     header-text-variant="white"
                     align="center"
                     >
-                    <Daily v-if="mostrarDepartamentos" :datos="sumarDepartamentos" />
+                    <LineDepartamental v-if="mostrarDepartamentos" :datos="soloDepartamentos" />
                 </b-card>
             </b-col>
             <b-col md="6">
@@ -48,12 +48,15 @@
 </template>
 <script>
 import { mapGetters } from 'vuex'
-import Daily from '@/components/Daily'
+import LineNacional from '@/components/LineNacional'
+import LineDepartamental from '@/components/LineDepartamental'
 export default {
     name: 'Departamentos',
     mounted(){
         setTimeout(()=> {
-            
+            console.log(
+                {soloddsdpsdpsd: this.soloDepartamentos}
+            )
         },2000)
     },
     methods: {
@@ -89,6 +92,20 @@ export default {
                 return arr
             }, [])  
         },
+        soloDepartamentos: function(){
+            return this.timeseries.reduce( (acc,dia) => {
+                let d = dia.datos.filter( item => item.departamento===1 )
+                if(d.length === 0)
+                    d = [{
+                        recuperados: 0,
+                        confirmados: 0,
+                        fallecidos: 0,
+                        fecha: dia.fecha,
+                    }]
+                acc.push(d[0])
+                return acc
+            },[])  
+        },
         mostrarDepartamentos: function(){
             if(this.sumarDepartamentos.length ==0)
                 return false
@@ -96,7 +113,8 @@ export default {
         }
     },
     components: {
-        Daily
+        LineNacional,
+        LineDepartamental,
     }
 }
 </script>
