@@ -45,7 +45,6 @@ export default {
                 recuperados = [],
                 decesos = [],
                 activos = []
-                
             this.datos.map( item => {
                 this.options.xAxis.categories.push(item.fecha)
                 confirmados.push(item.sumaCasosConfirmados)
@@ -57,10 +56,8 @@ export default {
             this.options.series.push(
                 {name: 'confirmados',data: confirmados,lineWidth: 1},
                 {name: 'decesos',data: decesos,lineWidth: 1},
-                
                 {name: 'recuperados',data: recuperados,lineWidth: 1},
                 {name: 'activos',data: activos,lineWidth: 1},
-                
             )
             this.mostrar = true
         }
