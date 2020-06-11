@@ -15,7 +15,9 @@ export default {
         return {
             mostrar: false,
             options: {
-                chart: {    type: 'column'  },
+                chart: {    scrollablePlotArea: {
+            
+        }  },
                 credits: {  enabled: false  },
                 title: {
                     text: ''
@@ -24,9 +26,7 @@ export default {
                     
                 },
                 yAxis: {
-                    title: {
-                        text: 'Casos por día'
-                    }
+                    title: null
                 },
                 series: []
             }

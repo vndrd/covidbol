@@ -1,18 +1,46 @@
 <template>
     <b-container>
         <b-row>
-            <b-col md="6">
-                <h4>Casos por día</h4>
-                <Daily  :datos="sumarDepartamentos"/>
+            <b-col md="6">       
+                <b-card
+                        border-variant="secondary"
+                        header="Evolución de Casos por día"
+                        header-bg-variant="secondary"
+                        header-text-variant="white"
+                        align="center"
+                    >
+                    <Daily  :datos="sumarDepartamentos"/>
+                </b-card>
             </b-col>
             <b-col md="6">
-                <h4>Recuperados por día</h4>
+                <b-card
+                        border-variant="secondary"
+                        header="Evolución de Casos por día"
+                        header-bg-variant="secondary"
+                        header-text-variant="white"
+                        align="center"
+                    >
+                </b-card>
             </b-col>
             <b-col md="6">
-                <h4>Fallecidos por día</h4>
+                <b-card
+                        border-variant="secondary"
+                        header="Evolución de Casos por día"
+                        header-bg-variant="secondary"
+                        header-text-variant="white"
+                        align="center"
+                    >
+                </b-card>
             </b-col>
             <b-col md="6">
-                <h4>Distribición de los casos</h4>
+                <b-card
+                        border-variant="secondary"
+                        header="Evolución de Casos por día"
+                        header-bg-variant="secondary"
+                        header-text-variant="white"
+                        align="center"
+                    >
+                </b-card>
             </b-col>
         </b-row>
     </b-container>
@@ -75,5 +103,7 @@ export default {
 }
 </script>
 <style lang="scss" scoped>
-
+.card {
+    margin-bottom: 1rem;
+}
 </style>
