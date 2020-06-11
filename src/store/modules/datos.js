@@ -10,17 +10,17 @@ const getters = {
     getTimeseries: (state) => state.timeseries,
 }
 const actions = {
-    loadData: function({commit}){
-        const allData = myFile.data;
-        // console.log({allData})
-        commit('setNacional',allData.pais)
-        commit('setDepartamentos',allData.departamentos)
-        commit('setTimeseries',allData.evolucion)
-        // console.log({fromVuex: allData.departamentos})
+    loadData: async function({commit}){
+        const allData = await myFile.data;
+         console.log({allData})
+        await commit('setNacional',allData.pais)
+        await commit('setDepartamentos',allData.departamentos)
+        await commit('setTimeseries',allData.evolucion)
+        console.log({fromVuex: allData.departamentos})
     }
 }
 const mutations = {
-    setNacional: (state,time) => state.time = time,
+    setNacional: (state,nacional) => state.nacional = nacional,
     setDepartamentos: (state,departamentos) => state.departamentos = departamentos,
     setTimeseries: (state,timeseries) => state.timeseries = timeseries,
 }

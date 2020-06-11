@@ -1,94 +1,58 @@
 <template>
     <b-col md="12">
-        <highcharts v-if="actived" :key="dailykey" :options="dataComputed" ></highcharts>
+        <highcharts :options="opciones" v-if="mostrar"></highcharts>
     </b-col>    
 </template>
 <script>
 export default {
     name: 'Daily',
-    props: ['days','min'],
-    data() {
-        return {
-            actived: false,
-            dailykey: 1,
-            options: {
-                chart: {
-                    type: 'area',
-                    height: 550,
-                },
-                title: {
-                    text: 'Casos'                },
-                xAxis: {
-                    categories: []
-                },
-                yAxis: {
-                    startOnTick: false,
-                    min: this.min,
-                    title: {
-                        text: ''
-                    }
-                },
-                colors: [
-                    '#aaaadd' ,
-                    '#ff8888' ,
-                    '#66dd66' ,
-                    '#888888' ,
-                ],
-                series: [],
-                plotOptions: {
-                    area: {
-                        marker: {
-                            enabled: false,
-                            symbol: 'circle',
-                            radius: 2,
-                            states: {
-                                hover: {
-                                    enabled: true
-                                }
-                            }
-                        }
-                    }
-                }
-            }
+    props: {
+        datos: {
+            default: []
         }
     },
-    watch: {
-    // whenever question changes, this function will run
-    country: function () {
-        this.setOptions()        
-    }
-  },
-    mounted: function() {
-        this.setOptions()        
+    data() {
+        return {
+            mostrar: false,
+            options: {
+                chart: {    type: 'column'  },
+                credits: {  enabled: false  },
+                title: {
+                    text: ''
+                },
+                xAxis: {
+                    
+                },
+                yAxis: {
+                    title: {
+                        text: 'Casos por día'
+                    }
+                },
+                series: []
+            }
+        }         
+    },
+    mounted(){
+        this.setOptions()
     },
     methods: {
-        setOptions: function() {
-            this.actived = false;
-            this.dailykey += 1            
-            let confirmed = [] , deaths = [], active = [] , recovered = []
+        setOptions: function(){
             this.options.xAxis.categories = []
-            this.options.xAxis.series = []
-            this.days.map( item => {
-                this.options.xAxis.categories.push(item.date);
-                confirmed.push(item.confirmed)
-                deaths.push(item.deaths)
-                recovered.push(item.recovered)
-                active.push(item.confirmed - item.deaths - item. recovered)
+            let confirmados = []
+            this.datos.map( item => {
+                this.options.xAxis.categories.push(item.fecha)
+                confirmados.push(item.sumaCasosConfirmados)
             })
-            let marker = {symbol:null}
-            this.options.series.push(
-                {name: 'Confirmados', data: confirmed, marker},
-                {name: 'Activos', data: active , marker},
-                {name: 'Recuperados', data: recovered ,marker},
-                {name: 'Decesos', data: deaths ,marker},
-            )
-            this.actived = true;
+            this.options.series.push({name: 'confirmados',data: confirmados})
+            this.mostrar = true
+            console.log({tes: 'NOT NOT NOT  null'})
+            console.log({datos: this.datos})
         }
     },
     computed: {
-        dataComputed: function(){
-            return this.options;
-        },
-    },
+        opciones: function(){
+            return this.options
+        }
+    }
 }
 </script>

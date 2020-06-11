@@ -47,13 +47,17 @@ import {mapGetters} from 'vuex'
 export default {
     name: 'TotalCasos',
     computed: {
-        ...mapGetters(['getNacional'])
+        ...mapGetters(['getNacional']),
     },
+
 }
 </script>
 <style lang="scss" scoped>
 small {
     font-size: 2rem;
     font-weight: 600;
+}
+.card-body {
+    padding: .8rem;
 }
 </style>
