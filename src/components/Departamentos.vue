@@ -20,7 +20,7 @@
                     header-text-variant="white"
                     align="center"
                     >
-                    <PieChartNacional v-if="mostrarDepartamentos" :datos="sumarDepartamentos" />
+                    <PieChartNacional v-if="mostrarDepartamentos" :datos="getNacional" />
                 </b-card>
             </b-col>
         </b-row>

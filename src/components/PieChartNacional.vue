@@ -8,7 +8,7 @@ export default {
     name: 'PieChartNacional',
     props: {
         datos: {
-            default: []
+            default: {}
         }
     },
     data() {
@@ -22,7 +22,7 @@ export default {
                 text: 'Casos al 10/06/2020'
             },
             subtitle: {
-                text: 'asdasdasd'
+                
             },
 
     accessibility: {
@@ -51,35 +51,9 @@ export default {
     series: [
         {
             data: [
-                {
-                    name: "Chrome",
-                    y: 12.74,
-                },
-                {
-                    name: "Firefox",
-                    y: 10.57,
-                },
-                {
-                    name: "Internet Explorer",
-                    y: 7.23,
-                },
-                {
-                    name: "Safari",
-                    y: 5.58,
-                },
-                {
-                    name: "Edge",
-                    y: 4.02,
-                },
-                {
-                    name: "Opera",
-                    y: 1.92,
-                },
-                {
-                    name: "Other",
-                    y: 7.62,
-                }
-            ]
+                
+            ],
+            innerSize: '30%',
         }
     ],
             }
@@ -88,6 +62,7 @@ export default {
     mounted(){
         this.setOptions()
         console.log("from pie chart")
+        console.log({datos:this.datos})
     },
     methods: {
         setOptions: function(){
@@ -105,12 +80,16 @@ export default {
             //     activos.push(item.sumaCasosActivos)
             // })
             // console.log({confirmados,recuperados,decesos})
-            // this.options.series.push(
-            //     {name: 'confirmados',data: confirmados,lineWidth: 1},
-            //     {name: 'decesos',data: decesos,lineWidth: 1},
-            //     {name: 'recuperados',data: recuperados,lineWidth: 1},
-            //     {name: 'activos',data: activos,lineWidth: 1},
-            // )
+            this.options.series[0].data.push(
+                {name: 'Activos',
+                    y: (this.datos.Confirmados - this.datos.Fallecidos - this.datos.Recuperados)/this.datos.Confirmados*100},
+                {name: 'Decesos',
+                    y: (this.datos.Fallecidos)/this.datos.Confirmados*100},
+                {name: 'Recuperados',
+                    y: (this.datos.Recuperados)/this.datos.Confirmados*100},
+                
+            )
+            console.log({options: this.options.series[0].data})
             this.mostrar = true
         }
     },
