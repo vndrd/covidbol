@@ -2,11 +2,11 @@
   <div class="home">
     <b-container fluid>
       <b-row>
-        <b-col md="2" >
+        <b-col md="12" >
           <!-- style="background:red;" -->
           <TotalCasos />
         </b-col>
-        <b-col md="10" >
+        <b-col md="12" >
             <Departamentos />
         </b-col>
       </b-row>      

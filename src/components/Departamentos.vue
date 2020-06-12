@@ -1,5 +1,5 @@
 <template>
-    <b-container>
+    <b-container fluid>
         <b-row>
             <b-col md="6">       
                 <b-card
@@ -20,9 +20,11 @@
                     header-text-variant="white"
                     align="center"
                     >
-                    <LineDepartamental v-if="mostrarDepartamentos" :datos="soloDepartamentos" />
+                    <PieChartNacional v-if="mostrarDepartamentos" :datos="sumarDepartamentos" />
                 </b-card>
             </b-col>
+        </b-row>
+        <b-row>
             <b-col md="6">
                 <b-card
                     border-variant="secondary"
@@ -31,7 +33,9 @@
                     header-text-variant="white"
                     align="center"
                     >
+                    <LineDepartamental v-if="mostrarDepartamentos" :datos="soloDepartamentos" />
                 </b-card>
+                
             </b-col>
             <b-col md="6">
                 <b-card
@@ -50,12 +54,13 @@
 import { mapGetters } from 'vuex'
 import LineNacional from '@/components/LineNacional'
 import LineDepartamental from '@/components/LineDepartamental'
+import PieChartNacional from '@/components/PieChartNacional'
 export default {
     name: 'Departamentos',
     mounted(){
         setTimeout(()=> {
             console.log(
-                {soloddsdpsdpsd: this.soloDepartamentos}
+                this.getNacional
             )
         },2000)
     },
@@ -76,7 +81,7 @@ export default {
         },
     },
     computed: {
-        ...mapGetters(['getDepartamentos','timeseries']),
+        ...mapGetters(['getDepartamentos','timeseries','getNacional']),
         departamentos: function(){
             return this.getDepartamentos
         },
@@ -94,7 +99,7 @@ export default {
         },
         soloDepartamentos: function(){
             return this.timeseries.reduce( (acc,dia) => {
-                let d = dia.datos.filter( item => item.departamento===1 )
+                let d = dia.datos.filter( item => item.departamento===2 )
                 if(d.length === 0)
                     d = [{
                         recuperados: 0,
@@ -115,6 +120,7 @@ export default {
     components: {
         LineNacional,
         LineDepartamental,
+        PieChartNacional,
     }
 }
 </script>

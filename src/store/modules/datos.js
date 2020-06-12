@@ -15,6 +15,7 @@ const getters = {
             });
             return arr
         }
+        //agrupar por fecha.
         let res = state.timeseries.reduce((acc, curr) => {
             if(!acc[curr.fecha]) 
                 acc[curr.fecha] = []; //If this type wasn't previously stored
